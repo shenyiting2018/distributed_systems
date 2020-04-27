@@ -1,3 +1,4 @@
 .idea/
 MyServer.iml
 target/*
+src/main/java/classes/*

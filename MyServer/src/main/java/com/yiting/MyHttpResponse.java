@@ -1,8 +1,8 @@
 package com.yiting;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class MyHttpResponse implements Serializable {
     private OutputStream output;
@@ -14,6 +14,14 @@ public class MyHttpResponse implements Serializable {
 
     public MyHttpResponse(OutputStream output) {
         this.output = output;
+    }
+
+    private String getServerTime() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return dateFormat.format(calendar.getTime());
     }
 
     public void sendErrorResponse(Exception e) throws IOException {
@@ -50,7 +58,6 @@ public class MyHttpResponse implements Serializable {
             );
             output.write(responseBody.getBytes());
             output.close();
-
         }
     }
 
@@ -71,10 +78,12 @@ public class MyHttpResponse implements Serializable {
     private String buildResponseBody(int statusCode, String status, String contentType, int contentLength, String content) {
         String stringTemplate = "HTTP/1.1 %s %s \r\n" +
                 "Content-type: %s\r\n" +
-                "Content-length: %s"+
+                "Content-length: %s\r\n" +
+                "date: %s" +
                 "\r\n\r\n" +
                 "%s";
-        String formattedString = String.format(stringTemplate, statusCode, status, contentType, contentLength, content);
+        String serverTime = this.getServerTime();
+        String formattedString = String.format(stringTemplate, statusCode, status, contentType, contentLength, serverTime, content);
         return formattedString;
     }
 

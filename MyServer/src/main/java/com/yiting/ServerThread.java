@@ -35,7 +35,6 @@ public class ServerThread implements Runnable {
             );
             this.response.sendResource(this.request.requestedResource);
             this.clientSocket.close();
-            this.clientSocket.close();
             System.out.println("Socket closed at " + Thread.currentThread().getId());
         } catch (IOException e) {
             e.printStackTrace();

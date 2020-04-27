@@ -1,0 +1,22 @@
+#!/usr/bin/python
+import os
+import sys
+
+if "-document_root" not in sys.argv:
+    print("-document_root missed from input")
+if "-port" not in sys.argv:
+    print("-port missed from input")
+
+document_root_pos = sys.argv.index("-document_root")
+document_root = sys.argv[document_root_pos + 1]
+if document_root[-1] != "/":
+    document_root = document_root + "/"
+
+port_pos = sys.argv.index("-port")
+port = sys.argv[port_pos + 1]
+
+if not port or not document_root:
+    raise ValueError("Port and document root must be provided! run -h to find the argument")
+
+os.chdir('./src/main/java/classes')
+os.system('java com.yiting.MyServer {} {}'.format(port, document_root))
