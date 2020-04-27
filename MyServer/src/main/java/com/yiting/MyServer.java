@@ -1,15 +1,14 @@
 package com.yiting;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.Socket;
 import java.net.ServerSocket;
-import java.net.InetAddress;
 
 public class MyServer {
     public static final int DEFAULT_PORT = 8080;
     private int port;
     private ServerSocket serverSocket;
-    public static String serverFilesLocation = "./";
+    public static String serverFilesLocation = "./jarc";
 
     private MyServer(int port) {
         try {
