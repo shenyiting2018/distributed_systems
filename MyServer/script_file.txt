@@ -1,0 +1,13 @@
+I wrote two scripts in Python and Bash to make it simpler to run my server. 
+
+For the first time, simply run the Makefile which should build the .class Java
+binaries. 
+
+All requested types, HTML, TXT, JPG, GIF should be supported. The homepage of
+SCU contains all of them. 
+
+Once `Makefile` is run, run the server with below example command:
+/server -document_root "<absolute_path>/webserver_files" -port 8080
+
+I also included a bunch of screenshots in the screenshot folder. 
+
